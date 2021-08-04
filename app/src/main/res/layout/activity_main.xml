@@ -6,13 +6,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/mainLayout"
+    android:gravity="center"
     tools:context=".MainActivity">
 
     <GridLayout
         android:id="@+id/board"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"/>
+        android:orientation="horizontal"
+        android:background="#888888"/>
 
 
 </LinearLayout>
