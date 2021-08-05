@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     int widthOfBlock, noOfBlocks =8, widthOfScreen;
     ArrayList<ImageView> candy = new ArrayList<>();
     int candyToBeDragged, candyToBeReplaced;
-    int notCandy =R.drawable.ic_launcher_background;
+    int notCandy =R.drawable.transparent;
     Handler mHandler;
     int interval = 100;
     TextView scoreResult;
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkColumnForThree(){
-        for (int i = 0; i < 47; i++){
+        for (int i = 0; i < 48; i++){
             int choosedCandy = (int) candy.get(i).getTag();
             boolean isBlank = (int) candy.get(i).getTag() == notCandy;
             int x = i;
