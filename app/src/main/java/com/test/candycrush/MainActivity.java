@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
                  }
              }
          }
+         moveDownCandies();
     }
 
     private void checkColumnForThree(){
@@ -131,6 +132,33 @@ public class MainActivity extends AppCompatActivity {
                 candy.get(x).setTag(notCandy);
             }
         }
+        moveDownCandies();
+    }
+
+    private void moveDownCandies(){
+        Integer[] firstRow = {0, 1, 2, 3, 4, 5, 6, 7};
+        List<Integer> list = Arrays.asList(firstRow);
+        for (int i = 55; i >= 0; i--){
+            if ((int)candy.get(i + noOfBlocks).getTag() == notCandy){
+                candy.get(i+ noOfBlocks).setImageResource((int)candy.get(i).getTag());
+                candy.get(i+ noOfBlocks).setTag(candy.get(i).getTag());
+                candy.get(i).setImageResource(notCandy);
+                candy.get(i).setTag(notCandy);
+
+                if (list.contains(i) && (int) candy.get(i).getTag() == notCandy){
+                    int randomColor = (int) Math.floor(Math.random() * candies.length);
+                    candy.get(i).setImageResource(candies[randomColor]);
+                    candy.get(i).setTag(candies[randomColor]);
+                }
+            }
+        }
+        for (int i = 0; i < 8; i++){
+            if ((int) candy.get(i).getTag() == notCandy){
+                int randomColor = (int) Math.floor(Math.random() * candies.length);
+                candy.get(i).setImageResource(candies[randomColor]);
+                candy.get(i).setTag(candies[randomColor]);
+            }
+        }
     }
 
     Runnable repeatChecker = new Runnable() {
@@ -139,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
             try {
                 checkRowForThree();
                 checkColumnForThree();
+                moveDownCandies();
             }
             finally {
                 mHandler.postDelayed(repeatChecker,interval);
