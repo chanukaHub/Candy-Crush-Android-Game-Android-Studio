@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     Handler mHandler;
     int interval = 100;
     TextView scoreResult;
+    int score = 0;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -100,6 +101,8 @@ public class MainActivity extends AppCompatActivity {
                  if ((int)candy.get(x++).getTag() == choosedCandy && !isBlank &&
                          (int)candy.get(x++).getTag() == choosedCandy &&
                          (int)candy.get(x).getTag() == choosedCandy){
+                     score = score + 3;
+                     scoreResult.setText(String.valueOf(score));
                      candy.get(x).setImageResource(notCandy);
                      candy.get(x).setTag(notCandy);
                      x--;
@@ -122,6 +125,8 @@ public class MainActivity extends AppCompatActivity {
             if ((int)candy.get(x).getTag() == choosedCandy && !isBlank &&
                     (int)candy.get(x + noOfBlocks).getTag() == choosedCandy &&
                     (int)candy.get(x+2 *noOfBlocks).getTag() == choosedCandy){
+                score = score + 3;
+                scoreResult.setText(String.valueOf(score));
                 candy.get(x).setImageResource(notCandy);
                 candy.get(x).setTag(notCandy);
                 x = x + noOfBlocks;
