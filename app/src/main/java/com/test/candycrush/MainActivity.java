@@ -9,6 +9,7 @@ import android.util.DisplayMetrics;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -32,13 +33,14 @@ public class MainActivity extends AppCompatActivity {
     int notCandy =R.drawable.ic_launcher_background;
     Handler mHandler;
     int interval = 100;
+    TextView scoreResult;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        scoreResult = findViewById(R.id.score);
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         widthOfScreen=displayMetrics.widthPixels;
@@ -111,11 +113,32 @@ public class MainActivity extends AppCompatActivity {
          }
     }
 
+    private void checkColumnForThree(){
+        for (int i = 0; i < 47; i++){
+            int choosedCandy = (int) candy.get(i).getTag();
+            boolean isBlank = (int) candy.get(i).getTag() == notCandy;
+            int x = i;
+            if ((int)candy.get(x).getTag() == choosedCandy && !isBlank &&
+                    (int)candy.get(x + noOfBlocks).getTag() == choosedCandy &&
+                    (int)candy.get(x+2 *noOfBlocks).getTag() == choosedCandy){
+                candy.get(x).setImageResource(notCandy);
+                candy.get(x).setTag(notCandy);
+                x = x + noOfBlocks;
+                candy.get(x).setImageResource(notCandy);
+                candy.get(x).setTag(notCandy);
+                x = x + noOfBlocks;
+                candy.get(x).setImageResource(notCandy);
+                candy.get(x).setTag(notCandy);
+            }
+        }
+    }
+
     Runnable repeatChecker = new Runnable() {
         @Override
         public void run() {
             try {
                 checkRowForThree();
+                checkColumnForThree();
             }
             finally {
                 mHandler.postDelayed(repeatChecker,interval);
